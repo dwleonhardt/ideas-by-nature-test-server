@@ -7,7 +7,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', function (req, res) {
 
-  axios.get('https://api.kraken.com/0/public/Assets')
+  axios.get('https://api.kraken.com/0/public/AssetPairs')
   .then(response => {
     console.log(response.data);
     res.send(response.data)
