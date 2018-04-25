@@ -7,7 +7,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', function (req, res) {
 
-  axios.get('https://api.kraken.com/0/public/AssetPairs')
+  axios.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD')
   .then(response => {
     console.log(response.data);
     res.send(response.data)
