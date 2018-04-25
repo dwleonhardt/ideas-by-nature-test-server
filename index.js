@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 var cors = require('cors');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 const exchange = require('./routes/exchange');
-const kraken = require('./routes/kraken');
+const priceData = require('./routes/price_data');
+const knex = require('knex');
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -16,5 +18,13 @@ app.listen(port, () => {
   console.log('Listening on port', port);
 });
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/exchange', exchange);
-app.use('/kraken', kraken);
+app.use('/price_data', priceData);
+
+
+const getData = () => {
+  axios.get('http://localhost:3000/price_data');
+}
+
+setInterval(getData, 30000);
