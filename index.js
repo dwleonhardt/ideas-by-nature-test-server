@@ -27,4 +27,4 @@ const getData = () => {
   axios.get('http://localhost:3000/price_data');
 }
 
-setInterval(getData, 30000);
+setInterval(getData, 60000);

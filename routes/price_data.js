@@ -22,10 +22,9 @@ router.get('/', function (req, res) {
     for (var i = 0; i < names.length; i++) {
       let krakenPrice = new Number(kraken.data.result[krakenKeys[i]]['c'][0]);
       let wexPrice = new Number(wex.data[wexKeys[i]]['last']);
-      let averagePrice = (krakenPrice + wexPrice) / 2;
+      let averagePrice = ((krakenPrice + wexPrice) / 2);
       currentPrices[names[i]] = averagePrice;
     }
-
     for (var currency in currentPrices) {
       let type = currency;
       knex('currency')
@@ -43,10 +42,14 @@ router.get('/', function (req, res) {
         .select('*')
         .where('name', type)
         .then((data) => {
+          console.log(currentPrices[type]);
           knex('price')
           .insert({
             currency_id: data[0].id,
             price: currentPrices[type]
+          })
+          .then((data) => {
+            console.log(data);
           })
         })
       })
