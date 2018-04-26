@@ -24,7 +24,7 @@ app.use('/price_data', priceData);
 
 
 const getData = () => {
-  axios.get('http://localhost:3000/price_data');
+  axios.get('https://ideas-by-nature-test.herokuapp.com/price_data');
 }
 
 setInterval(getData, 60000);
