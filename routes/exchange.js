@@ -3,12 +3,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const knex = require('../knex');
 
-router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.post('/', function (req, res) {
-  let send = req.body.send.currency;
-  let recieve = req.body.recieve.currency;
+router.get('/', function (req, res) {
+  let send = req.query.send;
+  let recieve = req.query.recieve;
   let response = {};
   knex
   .select('currency_id','price', 'time', 'currency.name')
