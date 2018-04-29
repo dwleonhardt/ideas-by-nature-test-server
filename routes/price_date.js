@@ -17,8 +17,9 @@ router.get('/', function (req, res) {
   .where('currency.name', currency)
   .orderBy('time', 'desc')
   .whereBetween('time', [start, end])
+  .whereRaw('extract(hour from time)::integer % 5 = 0')
   .then((data) => {
-    console.log(data.length);
+    console.log(data);
     res.send(data);
   })
 })
