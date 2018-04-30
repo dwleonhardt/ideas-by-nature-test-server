@@ -78,7 +78,12 @@ router.get('/', function (req, res) {
       })
 
     }
-    knex('price')
+    knex
+    .select('currency_id','price', 'volume', 'cap24hrChange', 'time', 'currency.name')
+    .from('price')
+    .join('currency', 'currency.id', 'currency_id')
+    .orderBy('time', 'desc')
+    .limit(4)
     .then((data) => {
       res.send(data);
     })
