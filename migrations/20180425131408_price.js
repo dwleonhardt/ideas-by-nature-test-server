@@ -4,6 +4,8 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('currency_id').references('id').inTable('currency').notNullable();
     table.decimal('price').notNullable();
+    table.bigInteger('volume').notNullable();
+    table.decimal('cap24hrChange').notNullable();
     table.timestamp('time').notNullable().defaultTo(knex.fn.now());
   });
 };
